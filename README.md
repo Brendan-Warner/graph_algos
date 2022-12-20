@@ -1,7 +1,7 @@
 # graph_algos
 c++ program that implements graph algorithms to find the shortest path.
 
-This algorithm takes in user input, this input is the starting node, the end node, the height and width of the graph, output(if they want output updated after every move, every few moves, or just the final graph, and if they want this to be saved to a file.) and if the edges are weighted. All the Algorithms work on both weighted and unweighted. Lastly, the user can choose to add walls, which are holes in the graph which none of the algorithms can pass. 
+This program takes in user input, this input is the starting node, the end node, the height and width of the graph, output(if they want output updated after every move, every few moves, or just the final graph, and if they want this to be saved to a file.) and if the edges are weighted. All the Algorithms work on both weighted and unweighted. Lastly, the user can choose to add walls, which are holes in the graph which none of the algorithms can pass. 
 
 algorithms involved:
 
