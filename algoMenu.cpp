@@ -31,9 +31,9 @@ void menuFunc()
 
 
 
-	cout << "Please enter a number for the height of your grid, the current cap is 20" << endl;
+	cout << "Please enter a number for the height of your grid" << endl;
 	cin >> gridh;
-	cout << "Please enter a number for the width of your grid, the current cap is 20" << endl;
+	cout << "Please enter a number for the width of your grid" << endl;
 	cin >> gridw;
 	cout << "Please enter the row of your starting posistion." << endl;
 	cin >> startrow;
