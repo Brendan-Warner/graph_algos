@@ -15,3 +15,5 @@ breadth search: This algorithm works by processing on the nodes on the current l
 
 depth first search: This algorithm works by processing a node and expanding it if applicable, if any of its child nodes can be expanded, then do so. The process continues until there are no child nodes to expand, which it then works its way back up, expanding other child nodes that have been skipped and their children and so on, or we find the finish node. This is by no means optimal and does not guarantee the shortest path as like breadth search there is no attempt and considering the distances or hurstics, it is only concerned with finding a path.
 
+
+Note about the make file: I made this project in visual studio, so the make file is bassed on make files i have made in the past on Linux servers, which i know won't work on a windows console as it has different commands. 
