@@ -50,7 +50,7 @@ void shortest_pathDj(grid* gridNode, bool outputFile)
 
 }
 
-//this is the first and main function, follows dj's alg using without using anything like a heap to keep track of minimum depth, instead just relies on sorting distances to keep track of the order.
+//this is the first and main function, follows dj's alg using a sorted vector to keep track of the next node to be processed.
 void djskersFunc(int starth, int startc, int finishh, int finishc, int height, int width, int output, char walls, char waited, bool outputFile)
 {
 	//if the user gave us a situation where the start and finish are the same, then just exit.
@@ -88,7 +88,7 @@ void djskersFunc(int starth, int startc, int finishh, int finishc, int height, i
 	//visited grid vector is for keeping track of what grids we have processed.
 	vector<grid*> visitedGridV;
 
-	//unvisited grid is the main grid acted on and is used to tell us what we haven't porcessed yet and the next thing to process
+	//unvisited grid is the main vecotr acted on and is used to tell us what we haven't porcessed yet and the next thing to process
 	vector<grid*> unvisitedGridV = gridV;
 
 
@@ -132,13 +132,14 @@ void djskersFunc(int starth, int startc, int finishh, int finishc, int height, i
 					userFile << "[" << visitedGridV[i]->row << "," << visitedGridV[i]->col << "]" << endl;
 				}
 			}
-			output_grid(gridV, height, width, outputFile);
-			while (!gridV.empty()) delete gridV.back(), gridV.pop_back();
 			if (outputFile)
 			{
 				userFile.close();
 			}
 			return;
+			output_grid(gridV, height, width, outputFile);
+			while (!gridV.empty()) delete gridV.back(), gridV.pop_back();
+			
 
 
 
