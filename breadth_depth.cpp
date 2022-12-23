@@ -41,9 +41,9 @@ void shortest_path_breadth_depth(grid* node, bool output_file)
 
 }
 
-//this works by checking the huristic only, which in this case is estimated distance we first get the clossest, sort the vector, which on the first run does nothing, pop it from the vector, then gets its neighbors,
-//we do this over and over until we get to the end node. this path is not certain to be optimal but thats a fault of the algorith itself. in a situation were we visited all avalible node and we still arn't at the end,  then
-//we have no valide shortest path.
+//this alog puts both breadth and depth first search alroithms into one, since the functionality needed for them to work is more or less the same, with the differance
+//being if we but the child nodes in the front of the vector or in the back, if depth first, then in the front, if not, then in the back, everything else is the 
+//same.
 void breadth_depth_alg(int starth, int startc, int finishh, int finishc, int height, int width, int output, char walls, char waited, bool output_file, int alg)
 {
 
@@ -53,11 +53,11 @@ void breadth_depth_alg(int starth, int startc, int finishh, int finishc, int hei
 		cout << "Start and end are in the same spot, shortest path is 0" << endl;
 		return;
 	}
-	vector<grid*> grid_v;
+	vector<grid*> grid_v;//this is the vector that keeps track of the overall grid, doesn't change in size, and is used to output the current grid.
 	int show = 0;
 
 
-	//this is the vector that keeps track of the overall grid, doesn't change in size, and is used to output the current grid.
+	
 
 
 	//if the user wants walls, then we go to the set wall function.
@@ -83,6 +83,9 @@ void breadth_depth_alg(int starth, int startc, int finishh, int finishc, int hei
 	//visited grid vector is for keeping track of what grids we have processed.
 	vector<grid*> visited_grid_v;
 
+	//a very hacky way to get the first clossest node, the reason we do this is because we don't store the start node anywhere, and the only effeciant way to 
+	//two more overlaoded functions could have been made for this algo to be faster, but decided against it. In any case, the start node is needed and we can't
+	//use any sorting since this alrgo doesn't take things like distance or anything else into consideration. 
 	int i = 0;
 	grid* clossest;
 	for (i = 0; i < grid_v.size(); i++)
@@ -121,15 +124,15 @@ void breadth_depth_alg(int starth, int startc, int finishh, int finishc, int hei
 			continue;
 		}
 
-		//call getneighbors function from gridfunctions but an overloaded one that only takes in a node and next_node that returns and upadated vecotr and updates their previous pointer to the node that set it as its neghbor
+		//call getneighbors function from gridfunctions but an overloaded one that only takes in a node and next_node that returns and upadated vector and updates their previous pointer to the node that set it as its neghbor
 		//we need to check in that function that their isn't already that node in the next_node vector, we can do this by simply running through the vector checking for duplicates,
 		if (alg == 4)
 		{
-			getNeighbors(clossest, next_node);
+			getNeighbors(clossest, next_node);//gets neighbors and checkis for duplacates, adding child nodes to the end of the vector.
 		}
 		else
 		{
-			getNeighborsDepth(clossest, next_node);
+			getNeighborsDepth(clossest, next_node);//gets neighbors and checkis for duplacates, adding child nodes to the front of the vector.
 		}
 
 
@@ -142,7 +145,7 @@ void breadth_depth_alg(int starth, int startc, int finishh, int finishc, int hei
 			clossest->type = 'v';
 		}
 
-		if (clossest->estimated_distance == 0)
+		if (clossest->estimated_distance == 0)//this tells us that we are on the finish node, so we can end.
 		{
 			shortest_path_breadth_depth(clossest, output_file);
 
