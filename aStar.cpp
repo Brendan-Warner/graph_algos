@@ -48,7 +48,7 @@ void shortest_pathAstar(grid* gridNode, bool outputFile)
 
 }
 
-//this algorithim is dj but includes an extra number, estimated distance, to try and ensure that we only check potentially relevent node that at least move in the right direction rather then treating every node as the same.
+//this algorithm is dj but includes an extra number, estimated distance, to try and ensure that we only check potentially relevant node that at least move in the right direction rather then treating every node as the same.
 void AStar(int starth, int startc, int finishh, int finishc, int height, int width, int output, char walls, char waited, bool outputFile)
 {
 	//if the user gives a start and end node at the same spot, exit.
@@ -61,9 +61,9 @@ void AStar(int starth, int startc, int finishh, int finishc, int height, int wid
 
 
 
-	vector<grid*> gridV;//the vector the keeps track of all of our current nodes, does not change until the end.
+	vector<grid*> gridV;//the vector the keeps track of all of our nodes, used for output of the grid and does not change throughout the program.
 
-	//if the usere want to add walls, then we call the walls function to fill up our walls vector wich is then passed to the overloaded create grid function.
+	//if the user wants to add walls, then we call the walls function to fill up our walls vector wich is then passed to the overloaded create grid function.
 	if (walls == 'y')
 	{
 		//every 2 numbers are the row and column of a wall
@@ -84,15 +84,15 @@ void AStar(int starth, int startc, int finishh, int finishc, int height, int wid
 	vector<grid*> unvisitedGridV = gridV;
 
 
-	//our main  loop that end when we run out of unvisited nodes.
+	//our main loop that ends when we run out of unvisited nodes, it ends this way if and only if their is no valid path to the finish node.
 	while (unvisitedGridV.size())
 	{
-		//overloaded sort function so that way we can sort this vecotr of structs.
+		//overloaded sort function so that way we can sort this vector of structs.
 		std::sort(unvisitedGridV.begin(), unvisitedGridV.end(), sortGrid);
 		grid* clossest = unvisitedGridV[0];
 		unvisitedGridV.erase(unvisitedGridV.begin());
 
-		//if we get a wall as clossest, then we just pop it and skip processesing it.
+		//if we get a wall as clossest, then we remove it from the vector and skip processing it.
 		if (clossest->type == 'w')
 		{
 			continue;
@@ -108,7 +108,7 @@ void AStar(int starth, int startc, int finishh, int finishc, int height, int wid
 			clossest->type = 'v';
 		}
 
-		//if we enconter this situation, then the user has boxed us in with wall of created some other type of situation where a shortest path is not possible. we output the nodes we have viisted and the grid, then return.
+		//if we enconter this situation, then the user has boxed us in with walls of created some other type of situation where a shortest path is not possible. we output the nodes we have visted and the grid, then return.
 		if (clossest->distance == 1000000)
 		{
 			cout << "Their is no valid shortest path, here are the nodes visited" << endl;
@@ -125,12 +125,13 @@ void AStar(int starth, int startc, int finishh, int finishc, int height, int wid
 					userFile << "[" << visitedGridV[i]->row << "," << visitedGridV[i]->col << "]" << endl;
 				}
 			}
-			output_grid(gridV, height, width, outputFile);
-			while (!gridV.empty()) delete gridV.back(), gridV.pop_back();
 			if (outputFile)
 			{
 				userFile.close();
 			}
+			output_grid(gridV, height, width, outputFile);
+			while (!gridV.empty()) delete gridV.back(), gridV.pop_back();
+			
 			return;
 
 
@@ -145,7 +146,7 @@ void AStar(int starth, int startc, int finishh, int finishc, int height, int wid
 		if (clossest->row == finishh && clossest->col == finishc)
 		{
 
-			shortest_pathAstar(clossest, outputFile);//overload this function to include file stuff, besically, their are two seperate functions, this one and then the same one passed a ofstream file type, we choose this by checking outputFile
+			shortest_pathAstar(clossest, outputFile);
 
 
 			if (outputFile)
@@ -164,7 +165,7 @@ void AStar(int starth, int startc, int finishh, int finishc, int height, int wid
 
 			output_grid(gridV, height, width, outputFile);
 
-			//add clean up functions here
+			
 			while (!gridV.empty()) delete gridV.back(), gridV.pop_back();
 
 
