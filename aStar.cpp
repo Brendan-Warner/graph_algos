@@ -3,6 +3,8 @@ using namespace std;
 #include <vector>
 #include <fstream>
 #include <algorithm>
+#include <chrono>
+#include <thread>
 #include "gridFunc.h"
 #include "aStar.h"
 
@@ -176,6 +178,7 @@ void AStar(int starth, int startc, int finishh, int finishc, int height, int wid
 
 			output_grid(gridV, height, width, outputFile);
 			show = 0;
+			std::this_thread::sleep_for(std::chrono::milliseconds(750));
 
 		}
 
