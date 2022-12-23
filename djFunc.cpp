@@ -2,6 +2,8 @@ using namespace std;
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <chrono>
+#include <thread>
 #include "gridFunc.h"
 #include "djFunc.h"
 #include <algorithm>
@@ -189,8 +191,10 @@ void djskersFunc(int starth, int startc, int finishh, int finishc, int height, i
 		{
 
 
+			
 			output_grid(gridV, height, width, outputFile);
 			show = 0;
+			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
 		}
 
