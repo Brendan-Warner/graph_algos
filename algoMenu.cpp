@@ -15,7 +15,7 @@ using namespace std;
 //main function, asks the user everything from which alg they want to if they want to include walls and if the graph is weighted at all.
 void menuFunc()
 {
-	int gridh = 5, gridw = 5, startrow = 3, startcol = 3, finishrow = 5, finishcol = 5, output = 0, algo_choice = 1;
+	int gridh = 0, gridw = 0, startrow = 0, startcol = 0, finishrow = 0, finishcol = 0, output = 0, algo_choice = 0;
 	char walls = ' ', waited = ' ', choiceFile = ' ';
 	bool outputFile = false;
 
@@ -23,7 +23,6 @@ void menuFunc()
 	cout << "Hello, welcome to this algorithim visualization program" << endl;
 	cout << "Here, you will select a start and stop node, as well as and walls, through the use of column and row posistions." << endl;
 	cout << "You can choose not to place any walls" << endl;
-	cout << "Their is currently only one algorithim to choose from at this time." << endl;
 	cout << "The visulaiszation number is for how many times the visuization will appear, selecting  zero will only have the final graph and the shortest path displayed, anything more then one will display a new graph every number of checks" << endl;
 	cout << "to the number inputed." << endl;
 	cout << "If you create a sistuation where it is immpossible to get the the finish posistion, then the final visulization will be of what was attempted with no shortest path displayed" << endl;
